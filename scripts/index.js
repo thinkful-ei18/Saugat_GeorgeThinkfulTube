@@ -21,9 +21,9 @@ const fetchVideos = function (searchTerm, callback) {
     key: API_KEY,
     q: searchTerm,
     part: 'snippet'
-  }
+  };
 
-  $.getJSON(BASE_URL, query, callback)
+  $.getJSON(BASE_URL, query, callback);
 };
 
 // TASK:
@@ -35,21 +35,29 @@ const fetchVideos = function (searchTerm, callback) {
 // TEST IT! Grab an example API response and send it into the function - make sure
 // you get back the object you want.
 const decorateResponse = function (response) {
-  
-  response.items.map( (vid, index) => {
-    console.log(vid.id.videoId)
-    console.log(vid.id.snippet.thumbnails.default)
-  })
 
-  
+  const decor = response.items.map((vid, index) => {
+    return {
+      id: vid.id.videoId,
+      title: vid.snippet.title,
+      thumbnail: vid.snippet.thumbnails.default.url
+    };
+  }
+  );
+  generateVideoItemHtml(decor);
+  addVideosToStore(decor);
 };
+
 
 // TASK:
 // 1. Create a `generateVideoItemHtml` function that receives the decorated object
 // 2. Using the object, return an HTML string containing all the expected data
 // TEST IT!
-const generateVideoItemHtml = function (video) {
-
+const generateVideoItemHtml = function (video) { 
+  return(`<li> 
+            <p>${video.title}</p> 
+          </li>`);
+  console.log (video.title);
 };
 
 // TASK:
@@ -57,17 +65,21 @@ const generateVideoItemHtml = function (video) {
 // objects and sets the array as the value held in store.items
 // TEST IT!
 const addVideosToStore = function (videos) {
-
+  store.videos = videos;
+  render();
 };
-
 // TASK:
 // 1. Create a `render` function
 // 2. Map through `store.videos`, sending each `video` through your `generateVideoItemHtml`
 // 3. Add your array of DOM elements to the appropriate DOM element
 // TEST IT!
 const render = function () {
-
+  const newVid = store.videos.map((vid) => {
+    generateVideoItemHtml(vid);
+  });
+  $('.results').html(newVid);
 };
+
 
 // TASK:
 // 1. Create a `handleFormSubmit` function that adds an event listener to the form
@@ -84,9 +96,11 @@ const handleFormSubmit = function () {
 
 };
 
+console.log(store);
 // When DOM is ready:
 $(function () {
   // TASK:
   // 1. Run `handleFormSubmit` to bind the event listener to the DOM
   fetchVideos('cats', decorateResponse);
+  decorateResponse();
 });
