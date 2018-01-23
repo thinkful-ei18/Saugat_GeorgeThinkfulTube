@@ -10,7 +10,7 @@ const VideoList = function () {
     return (`<li> 
             <p>${video.title}</p>
             <a href="https://www.youtube.com/watch?v=${video.id}">
-              <img src="${video.thumbnail}">
+              <img class= "vid-thumbnails" src="${video.thumbnail}">
             </a> 
           </li>`);
 
@@ -28,7 +28,7 @@ const VideoList = function () {
       return {
         id: item.id.videoId,
         title: item.snippet.title,
-        thumbnail: item.snippet.thumbnails.default.url
+        thumbnail: item.snippet.thumbnails.high.url
       };
     }
     );

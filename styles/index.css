@@ -1,12 +1,53 @@
-* {
-    box-sizing: border-box;
+*{ 
+    box-sizing: border-box; 
+    margin: 0 auto; }
+h1 { 
+    color: floralwhite; 
 }
 
-body {
-    margin: 0;
-    padding: 0;
-    border: 0;
-    text-align: center;
-    font-family: Arial, Helvetica, sans-serif;
+body { 
+    margin: 0; 
+    padding: 0; 
+    border: 0; 
+    text-align: center; 
+    font-family: Arial, Helvetica, sans-serif; 
+    margin-left: auto; 
+    margin-right: auto; 
+    background: linear-gradient(to right, #2c3e50, #3498db); 
 }
 
+main { 
+    color: white; 
+    
+}
+
+.box { 
+    height: 200px; 
+    width: 300px; 
+    background: grey; 
+}
+
+ul li {
+    list-style: none;
+}
+
+li .vid-thumbnails {
+    
+    width: 20%;
+    
+}
+
+li p {
+border: 2px solid green;
+font-size: 20px;
+background-color: purple;
+
+}
+
+@media screen and (max-width: 780px){
+    li .vid-thumbnails {
+    
+        width: 100%;
+        display: inline;
+    }
+}
